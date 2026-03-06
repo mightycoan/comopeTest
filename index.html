@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>COMOPE TEST</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+    
+    <style>
+        body { background: rgba(0,0,0,0.05); padding: 2em; font-family: Roboto, sans-serif; }
+        .my-card { background: white; padding: 20px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .title { font-size: 24px; margin-bottom: 15px; color: #333; }
+        
+        .mdc-list-item { height: 48px; display: flex; align-items: center; cursor: pointer; text-decoration: none; color: inherit; }
+        .mdc-list-item__graphic { margin-right: 16px; }
+        
+        /* ESTILO PARA DESHABILITAR COMO EN TU IMAGEN */
+        .item-disabled {
+            color: rgba(0, 0, 0, 0.26) !important;
+            pointer-events: none; /* No permite clicks */
+            cursor: default;
+        }
+        .item-disabled .material-icons {
+            color: rgba(0, 0, 0, 0.12) !important;
+        }
+
+        .icon-start { color: green; }
+        .icon-novedad { color: blue; }
+        .icon-stop { color: red; }
+    </style>
+</head>
+<body>
+
+    <div class="my-card">
+        <div class="title">Control y Monitoreo | COMOPE</div>
+        
+        <ul class="mdc-list">
+            <li class="mdc-list-item" onclick="gestionarPatrullaje(1)">
+                <span class="mdc-list-item__graphic material-icons icon-start">play_arrow</span>
+                Iniciar Patrullaje
+            </li>
+            
+            <li class="mdc-list-divider"></li>
+            
+            <li class="mdc-list-item item-disabled">
+                <span class="mdc-list-item__graphic material-icons icon-novedad">post_add</span>
+                Registrar Resultados
+            </li>
+            
+            <li class="mdc-list-divider"></li>
+            
+            <li class="mdc-list-item item-disabled">
+                <span class="mdc-list-item__graphic material-icons icon-stop">stop</span>
+                Finalizar Patrullaje
+            </li>
+        </ul>
+    </div>
+
+    <div class="mdc-snackbar">
+        <div class="mdc-snackbar__surface">
+            <div class="mdc-snackbar__label" role="status" aria-live="polite"></div>
+            <div class="mdc-snackbar__actions">
+                <button type="button" class="mdc-button mdc-snackbar__action">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script>
+        let snackbar;
+
+        window.onload = function() {
+            // Inicializar el componente de alerta de Material
+            snackbar = new mdc.snackbar.MDCSnackbar(document.querySelector('.mdc-snackbar'));
+        };
+
+        function gestionarPatrullaje(indicador) {
+            if (indicador === 1) {
+                // 1. Mostrar el mensaje solicitado
+                const label = document.querySelector('.mdc-snackbar__label');
+                label.textContent = "Esta opción no esta disponible de momento para su usuario, por favor contactarse con el administrador";
+                snackbar.open();
+                
+                // 2. Log en consola para verificar que entró aquí
+                console.log("Acceso denegado: Iniciar Patrullaje");
+                
+                // 3. Saltarse todo lo demás (no carga iframe, no hace nada más)
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>
